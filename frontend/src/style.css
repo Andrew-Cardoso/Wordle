@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app,
+main {
+  font-size: 16px;
+  height: 100vh;
+  width: 100vw;
+  background: #290001;
+  overflow-x: hidden;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+}
+
+body, input, button, textarea {
+  color: #DBCBBD;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+button,
+input {
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button:hover, button:active, button:focus,
+input:hover,
+input:active,
+input:focus {
+  border: none;
+  outline: none;
+}
+
+#state {
+  width: fit-content;
+  height: fit-content;
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  place-items: center;
+  gap: 1rem;
+}
+#state .title {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+#state .submit-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+#state .send-attempt {
+  background: #4a0002;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.6rem;
+  border-radius: 8px;
+  filter: drop-shadow(0px 0px 8px #121212);
+  align-self: flex-end;
+}
+#state .send-attempt strong {
+  font-weight: 800;
+  font-size: 1.55rem;
+}
+#state .word-attempt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+#state .word-attempt .letter-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  filter: drop-shadow(0px 0px 10px #000);
+}
+#state .word-attempt .letter-container .letter {
+  width: 5rem;
+  height: 5rem;
+  max-width: 16.6vw;
+  max-height: 16.6vw;
+  background: #87431D;
+  text-transform: uppercase;
+  font-size: 3rem;
+  cursor: text;
+}
+#state .word-attempt .letter-container .letter:read-only {
+  filter: brightness(0.8);
+  user-select: none;
+  cursor: help;
+}
+#state .word-attempt .letter-container .letter:disabled {
+  filter: brightness(0.4);
+  cursor: not-allowed;
+}
+#state .word-attempt .letter-container.right-place {
+  filter: drop-shadow(0px 0px 10px #2b4c3b);
+}
+#state .word-attempt .letter-container.right-place .letter {
+  background: #306843;
+}
+#state .word-attempt .letter-container.wrong-place {
+  filter: drop-shadow(0px 0px 10px #473603);
+}
+#state .word-attempt .letter-container.wrong-place .letter {
+  background: #a07b07;
+}
+#state .word-attempt .letter-container.wrong-char {
+  filter: drop-shadow(0px 0px 10px #2c1e1e);
+}
+#state .word-attempt .letter-container.wrong-char .letter {
+  background: #1f1414;
+}
+
+#end-screen {
+  z-index: 99;
+  position: fixed;
+  place-items: center;
+  place-content: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: #1008;
+  display: none;
+  grid-template-rows: repeat(3, 10rem);
+  backdrop-filter: blur(4px) brightness(0.7);
+  font-family: Helvetica;
+}
+#end-screen.show {
+  display: grid;
+}
+#end-screen h1 {
+  font-size: 2.4rem;
+  filter: drop-shadow(0px 0px 2px #000);
+  -webkit-text-stroke: thin #000;
+  font-weight: bolder;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+#end-screen h1.win-text {
+  color: #4e8a6b;
+}
+#end-screen h1.lost-text {
+  color: #634242;
+}
+#end-screen p {
+  font-size: 1.7rem;
+  color: #ff4348;
+  filter: drop-shadow(0px 0px 2px #000);
+  -webkit-text-stroke: thin #000;
+  display: flex;
+  gap: 0.6rem;
+  font-weight: 700;
+}
+#end-screen p strong {
+  font-size: 1.85rem;
+  text-transform: uppercase;
+  color: #ff151a;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+#end-screen button {
+  font-size: 1.3rem;
+  padding: 1rem 2rem;
+  background: #610002;
+  color: #CCC;
+  font-weight: 500;
+  filter: drop-shadow(0px 0px 4px #000);
+}
+#end-screen button:hover {
+  background: #2c1e1e;
+  color: #DBCBBD;
+}
+#end-screen .win-text ~ button:hover {
+  background: #2b4c3b;
+  color: #DBCBBD;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+/*# sourceMappingURL=style.css.map */

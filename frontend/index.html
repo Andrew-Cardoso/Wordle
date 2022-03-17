@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>Wordle</title>
+  </head>
+  <body>
+    <div id="app">
+      <main>
+        <article id="state" x-data="$store.state">
+          <h1 class="title">Wordle</h1>
+          <template x-for="(attempt, index) in attempts" :key="index">
+            <section class="word-attempt">
+              <template x-for="letterState in attempt.lettersState">
+                <div
+									class="letter-container"
+									:class="letterStatusClass(letterState[1])"
+                  data-balloon-pos="up"
+                  @mouseenter="toggleTooltip($el, letterState)"
+                >
+                  <input
+                    type="text"
+                    maxlength="1"
+                    class="letter"
+										x-cloak
+										x-model="letterState[0]"
+                    :disabled="index > currentAttempt || loading"
+                    :readonly="index < currentAttempt || loading"
+										@keydown.prevent="onPlayerInput($event, letterState, index)"
+                  />
+                </div>
+              </template>
+              <template x-if="attempts.indexOf(attempt) === currentAttempt">
+                <template x-teleport=".submit-container">
+                  <button
+                    class="send-attempt"
+                    x-cloak
+                    x-transition
+                    x-show="getWord()?.length === 5"
+                    :disabled="loading"
+                    @click="submitAttempt()"
+                  >
+                    <span>Tentar</span>
+                    <strong x-text="getWord()"></strong>
+                  </button>
+                </template>
+              </template>
+            </section>
+          </template>
+          <div class="submit-container"></div>          
+        </article>
+      </main>
+    </div>
+    <div id="end-screen">
+      <h1></h1>
+      <p>
+        A palavra era 
+        <strong></strong>
+      </p>
+      <button>Jogar novamente</button>
+    </div>    
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
